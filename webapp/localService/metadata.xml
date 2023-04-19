@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZCRUSCOTTODOCFINANCE_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZFI_PREV_DOCFIN" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Azienda"/>
+                    <PropertyRef Name="Numeratore"/>
+                    <PropertyRef Name="Anno"/>
+                    <PropertyRef Name="Movimento"/>
+                    <PropertyRef Name="N_progr_per_anno_e_numero_ritorno_co_ge"/>
+                </Key>
+                <Property Name="Azienda" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Company Code"/>
+                <Property Name="Numeratore" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="User Name"/>
+                <Property Name="Anno" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Fiscal Year"/>
+                <Property Name="Movimento" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Character Field with Length 10"/>
+                <Property Name="N_progr_per_anno_e_numero_ritorno_co_ge" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Reserve"/>
+                <Property Name="Data_Operazione" Type="Edm.String" MaxLength="10" sap:label="Posting Date"/>
+                <Property Name="Banca" Type="Edm.String" MaxLength="5" sap:label="House Bank"/>
+                <Property Name="RBN" Type="Edm.String" MaxLength="18" sap:label="Bank Account"/>
+                <Property Name="Data_registrazione_tesoreria" Type="Edm.String" MaxLength="10" sap:label="Posting Date"/>
+                <Property Name="Causale_Coge" Type="Edm.String" MaxLength="16" sap:label="Reference"/>
+                <Property Name="Importo_in_divisa" Type="Edm.Decimal" Precision="24" Scale="3" sap:label="Amount"/>
+                <Property Name="Divisa" Type="Edm.String" MaxLength="5" sap:label="G/L Currency" sap:semantics="currency-code"/>
+                <Property Name="Divisa_azienda" Type="Edm.String" MaxLength="5" sap:label="G/L Currency" sap:semantics="currency-code"/>
+                <Property Name="Controvalore" Type="Edm.Decimal" Precision="24" Scale="3" sap:label="Amount in LC"/>
+                <Property Name="Data_valuta" Type="Edm.String" MaxLength="10" sap:label="Baseline Date"/>
+                <Property Name="Note" Type="Edm.String" MaxLength="50" sap:label="Text"/>
+                <Property Name="Tipo_Documento" Type="Edm.String" MaxLength="2" sap:label="Component of the Version Number"/>
+                <Property Name="Numero_partita" Type="Edm.String" MaxLength="10" sap:label="Character Field with Length 10"/>
+                <Property Name="Piano_dei_conti" Type="Edm.String" MaxLength="4" sap:label="Chart of Accts"/>
+                <Property Name="Sezione_Aziendale" Type="Edm.String" MaxLength="6" sap:label="Reserve"/>
+                <Property Name="Voce" Type="Edm.String" MaxLength="1" sap:label="Payment Method"/>
+                <Property Name="Chiave_coge" Type="Edm.String" MaxLength="26" sap:label="char26"/>
+                <Property Name="Data_scadenza" Type="Edm.String" MaxLength="10" sap:label="Net Due Date"/>
+                <Property Name="FLAG_Acconto_saldo" Type="Edm.String" MaxLength="1" sap:label="Single-Character Flag"/>
+                <Property Name="Anno_Coge" Type="Edm.String" MaxLength="4" sap:label="Fiscal Year"/>
+                <Property Name="Numero_ritorno_coge" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="Descrizione_operazione" Type="Edm.String" MaxLength="50" sap:label="Text"/>
+                <Property Name="Flag_distinta" Type="Edm.String" MaxLength="1" sap:label="Single-Character Flag"/>
+                <Property Name="Numero_documento" Type="Edm.String" MaxLength="16" sap:label="Reference"/>
+                <Property Name="Importo_originario_scadenza" Type="Edm.Decimal" Precision="24" Scale="3" sap:label="Amount"/>
+                <Property Name="Azienda_nome_conto" Type="Edm.String" MaxLength="10" sap:label="Character Field with Length 10"/>
+                <Property Name="Nome_conto" Type="Edm.String" MaxLength="16" sap:label="Field of length 16"/>
+                <Property Name="Piano_dei_conti_destinatario" Type="Edm.String" MaxLength="16" sap:label="Field of length 16"/>
+                <Property Name="Data_documento_origine" Type="Edm.String" MaxLength="10" sap:label="Posting Date"/>
+                <Property Name="Note_CBI" Type="Edm.String" MaxLength="600" sap:label="Char 600"/>
+            </EntityType>
+            <EntityContainer Name="ZCRUSCOTTODOCFINANCE_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZFI_PREV_DOCFINSet" EntityType="ZCRUSCOTTODOCFINANCE_SRV.ZFI_PREV_DOCFIN" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://orogeldev:44333/sap/opu/odata/sap/ZCRUSCOTTODOCFINANCE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://orogeldev:44333/sap/opu/odata/sap/ZCRUSCOTTODOCFINANCE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

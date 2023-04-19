@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <SelectDialog title="Selezione Attributo" confirm="onVHDialogNewkoClose" cancel="onVHDialogNewkoClose" search="onSearchNewko" showClearButton="true" items="{appModel>/Newko}" multiSelect="false">
+        <StandardListItem title="{appModel>Value}" type="Active"/>
+    </SelectDialog>
+</core:FragmentDefinition>

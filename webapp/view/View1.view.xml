@@ -1,0 +1,282 @@
+<mvc:View controllerName="it.orogel.zcruscottodocfinance.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns="sap.m"
+    xmlns:o="sap.ui.layout.form"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar">
+    <Shell id="shell" appWidthLimited="false">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content>
+                        <HBox alignContent="End" alignItems="Center">
+                            <Label text="Azienda" class="sapUiMediumMarginBeginEnd"/>
+                            <smartField:SmartField id="idSocieta" value="{path: 'Bukrs', mode:'OneWay'}" entitySet="SocietaSet" mandatory="false" class="sapUiMediumMarginBeginEnd">
+                            </smartField:SmartField>
+                        </HBox>
+                        <l:HorizontalLayout >
+                            <Label text="Data ricezione da" labelFor="DataDaInput" class="sapUiMediumMarginBeginEnd sapUiSmallMarginTop"/>
+                            <DatePicker id="DataDaInput" placeholder="" change="DataDaChange" showFooter="false" displayFormat="short" class="sapUiMediumMarginBegin sapUiLargeMarginEnd"/>
+                            <Label text="a" labelFor="DataAInput" class="sapUiLargeMarginBeginEnd sapUiSmallMarginTop"/>
+                            <DatePicker id="DataAInput" placeholder="" change="DataAChange" showFooter="false" displayFormat="short" class="sapUiMediumMarginBegin sapUiLargeMarginEnd"/>
+                            <Button text="{i18n>lbl.Cerca}" type="Emphasized" icon="sap-icon://search" press="onRicerca" class="sapUiLargeMarginBeginEnd"/>
+                        </l:HorizontalLayout>
+                        <OverflowToolbar id="ButtonBar" class="sapUiSmallMarginTop">
+                            <Button text="{i18n>lbl.Seleziona}" type="Emphasized" press="onSeleziona" class="sapUiSmallMarginBegin sapUiLargeMarginEnd"/>
+                            <Button text="{i18n>lbl.SelezionaTutte}" type="Emphasized" press="onSelezionaTutte" class="sapUiLargeMarginBeginEnd"/>
+                            <Button text="{i18n>lbl.Simulare}" type="Emphasized" press="onSimulare" class="sapUiLargeMarginBeginEnd"/>
+                            <Button text="{i18n>lbl.Modifica}" type="Emphasized" press="onModificare" class="sapUiLargeMarginBeginEnd"/>
+                            <Button text="{i18n>lbl.Salvare}" type="Emphasized" press="onSalvare" class="sapUiLargeMarginBeginEnd"/>
+                            <Button text="{i18n>lbl.Registrare}" type="Emphasized" press="onRegistrare" class="sapUiLargeMarginBeginEnd"/>
+                            <Button text="{i18n>lbl.Declinare}" type="Emphasized" press="onDeclinare" class="sapUiLargeMarginBeginEnd"/>
+                        </OverflowToolbar>
+                        <ScrollContainer vertical="true" horizontal="false">
+                            <t:Table id="AccountingDocument" rows="{appModel>/rows}" selectionMode="None" enableSelectAll="true" visibleRowCountMode="Interactive" ariaLabelledBy="title" alternateRowColors="true" enableCellFilter="true" columnHeaderVisible="true" showNoData="true" fixedColumnCount="3">
+                                <t:columns>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Selected" sortProperty="Selected" width="3em">
+                                        <t:template>
+                                            <!--<Text text="{Selected}" wrapping="false"/>-->
+                                            <CheckBox selected="{Selected}" />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" width="3em">
+                                        <Label text="{i18n>lbl.EsitoTest}"/>
+                                        <t:template>
+                                            <core:Icon src="{ path:'EsitoTest',  formatter: '.formatter.fmIconChange'}" size="2em" color="{=${EsitoTest} === 'Error' ? '#FF0000' : ${EsitoTest} === 'Success' ? '#00FF00' : ${EsitoTest} === 'Declinato' ? '#0000FF' : ''}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Azienda" sortProperty="Azienda" width="10em">
+                                        <Label text="{i18n>lbl.Azienda}"/>
+                                        <t:template>
+                                            <Text text="{Azienda}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Numeratore" sortProperty="Numeratore" width="10em">
+                                        <Label text="{i18n>lbl.Numeratore}"/>
+                                        <t:template>
+                                            <Text  text ="{Numeratore}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Anno" sortProperty="Anno" width="10em">
+                                        <Label text="{i18n>lbl.Anno}"/>
+                                        <t:template>
+                                            <Text text="{Anno}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Movimento" sortProperty="Movimento" width="10em">
+                                        <Label text="{i18n>lbl.Movimento}"/>
+                                        <t:template>
+                                            <Text text ="{Movimento}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="N_progr_per_anno_e_numero_ritorno_co_ge" sortProperty="N_progr_per_anno_e_numero_ritorno_co_ge" width="10em">
+                                        <Label text="{i18n>lbl.N_progr_per_anno_e_numero_ritorno_co_ge}"/>
+                                        <t:template>
+                                            <Text  text ="{N_progr_per_anno_e_numero_ritorno_co_ge}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Data_Operazione" sortProperty="Data_Operazione" width="10em">
+                                        <Label text="{i18n>lbl.Data_Operazione}"/>
+                                        <t:template>
+                                            <Text text ="{ path:'Data_Operazione',  formatter: '.formatter.fmFormatDate'}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Banca" sortProperty="Banca" width="10em">
+                                        <Label text="{i18n>lbl.Banca}"/>
+                                        <t:template>
+                                            <Text text="{Banca}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="RBN" sortProperty="RBN" width="10em">
+                                        <Label text="{i18n>lbl.RBN}"/>
+                                        <t:template>
+                                            <Text text="{RBN}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Data_registrazione_tesoreria" sortProperty="Data_registrazione_tesoreria" width="10em">
+                                        <Label text="{i18n>lbl.Data_registrazione_tesoreria}"/>
+                                        <t:template>
+                                            <Text text ="{ path:'Data_registrazione_tesoreria',  formatter: '.formatter.fmFormatDate'}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <!--<t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Causale_Coge" sortProperty="Causale_Coge" width="10em">
+                                        <Label text="{i18n>lbl.Causale_Coge}"/>
+                                        <t:template>
+                                            <Text text="{Causale_Coge}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>-->
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Importo_in_divisa" sortProperty="Importo_in_divisa" width="10em">
+                                        <Label text="{i18n>lbl.Importo_in_divisa}"/>
+                                        <t:template>
+                                            <Text text="{Importo_in_divisa}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Divisa" sortProperty="Divisa" width="10em">
+                                        <Label text="{i18n>lbl.Divisa}"/>
+                                        <t:template>
+                                            <Text text="{Divisa}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Divisa_azienda" sortProperty="Divisa_azienda" width="10em">
+                                        <Label text="{i18n>lbl.Divisa_azienda}"/>
+                                        <t:template>
+                                            <Text text="{Divisa_azienda}" />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Controvalore" sortProperty="Controvalore" width="10em">
+                                        <Label text="{i18n>lbl.Controvalore}"/>
+                                        <t:template>
+                                            <Text text="{Controvalore}" />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Data_valuta" sortProperty="Data_valuta" width="10em">
+                                        <Label text="{i18n>lbl.Data_valuta}"/>
+                                        <t:template>
+                                            <Text text ="{ path:'Data_valuta',  formatter: '.formatter.fmFormatDate'}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Note" sortProperty="Note" width="10em">
+                                        <Label text="{i18n>lbl.Note}"/>
+                                        <t:template>
+                                            <Input value="{Note}" editable="{Editable}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Causale_Coge" sortProperty="Causale_Coge" width="10em">
+                                        <Label text="{i18n>lbl.Tipo_Documento}"/>
+                                        <t:template>
+                                            <Text text="{Causale_Coge}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Numero_partita" sortProperty="Numero_partita" width="10em">
+                                        <Label text="{i18n>lbl.Numero_partita}"/>
+                                        <t:template>
+                                            <Text text="{Numero_partita}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="AccountType" sortProperty="AccountType" width="10em">
+                                        <Label text="{i18n>lbl.AccountType}"/>
+                                        <t:template>
+                                            <Text text="{AccountType}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Conto_Coge" sortProperty="Conto_Coge" width="10em">
+                                        <Label text="{i18n>lbl.Conto_Coge}"/>
+                                        <t:template>
+                                            <Input value="{Conto_Coge}" editable="{Editable}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Sezione_Aziendale" sortProperty="Sezione_Aziendale" width="10em">
+                                        <Label text="{i18n>lbl.Sezione_Aziendale}"/>
+                                        <t:template>
+                                            <Text text="{Sezione_Aziendale}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Voce" sortProperty="Voce" width="10em">
+                                        <Label text="{i18n>lbl.Voce}"/>
+                                        <t:template>
+                                            <Text text="{Voce}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Chiave_coge" sortProperty="Chiave_coge" width="10em">
+                                        <Label text="{i18n>lbl.Chiave_coge}"/>
+                                        <t:template>
+                                            <Text text="{Chiave_coge}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Data_scadenza" sortProperty="Data_scadenza" width="10em">
+                                        <Label text="{i18n>lbl.Data_scadenza}"/>
+                                        <t:template>
+                                            <DatePicker value="{ path: 'Data_scadenza',type : 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy'}}" editable="{Editable}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="FLAG_Acconto_saldo" sortProperty="FLAG_Acconto_saldo" width="10em">
+                                        <Label text="{i18n>lbl.FLAG_Acconto_saldo}"/>
+                                        <t:template>
+                                            <Text text="{FLAG_Acconto_saldo}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Anno_Coge" sortProperty="Anno_Coge" width="10em">
+                                        <Label text="{i18n>lbl.Anno_Coge}"/>
+                                        <t:template>
+                                            <Text text="{Anno_Coge}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Numero_ritorno_coge" sortProperty="Numero_ritorno_coge" width="10em">
+                                        <Label text="{i18n>lbl.Numero_ritorno_coge}"/>
+                                        <t:template>
+                                            <Text text="{Numero_ritorno_coge}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Descrizione_operazione" sortProperty="Descrizione_operazione" width="10em">
+                                        <Label text="{i18n>lbl.Descrizione_operazione}"/>
+                                        <t:template>
+                                            <Input value="{Descrizione_operazione}" editable="{Editable}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Flag_distinta" sortProperty="Flag_distinta" width="10em">
+                                        <Label text="{i18n>lbl.Flag_distinta}"/>
+                                        <t:template>
+                                            <Text text="{Flag_distinta}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="AssignmentReference" sortProperty="AssignmentReference" width="10em">
+                                        <Label text="{i18n>lbl.AssignmentReference}"/>
+                                        <t:template>
+                                            <Text text="{AssignmentReference}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Importo_originario_scadenza" sortProperty="Importo_originario_scadenza" width="10em">
+                                        <Label text="{i18n>lbl.Importo_originario_scadenza}"/>
+                                        <t:template>
+                                            <Text text="{Importo_originario_scadenza}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Azienda_nome_conto" sortProperty="Azienda_nome_conto" width="10em">
+                                        <Label text="{i18n>lbl.Azienda_nome_conto}"/>
+                                        <t:template>
+                                            <Text text="{Azienda_nome_conto}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Nome_conto" sortProperty="Nome_conto" width="10em">
+                                        <Label text="{i18n>lbl.Nome_conto}"/>
+                                        <t:template>
+                                            <Input value="{Nome_conto}" editable="{Editable}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Piano_dei_conti_destinatario" sortProperty="Piano_dei_conti_destinatario" width="10em">
+                                        <Label text="{i18n>lbl.Piano_dei_conti_destinatario}"/>
+                                        <t:template>
+                                            <Text text="{Piano_dei_conti_destinatario}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Data_documento_origine" sortProperty="Data_documento_origine" width="10em">
+                                        <Label text="{i18n>lbl.Data_documento_origine}"/>
+                                        <t:template>
+                                            <Text text ="{ path:'Data_documento_origine',  formatter: '.formatter.fmFormatDate'}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Note_CBI" sortProperty="Note_CBI" width="10em">
+                                        <Label text="{i18n>lbl.Note_CBI}"/>
+                                        <t:template>
+                                            <Text text="{Note_CBI}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true">
+                                        <Label text="{i18n>lbl.Note}"/>
+                                        <t:template>
+                                            <Button icon="sap-icon://document-text" tooltip="{i18n>lbl.Note}" press="onNote" enabled="{enableNote}"/>
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+                        </ScrollContainer>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>
+
